@@ -1,0 +1,740 @@
+/*
+ * Mobilni layout (≤768px) — desktop ostaje u styles.css.
+ * Struktura: <section class="section"> + <div class="container"> u index.html
+ */
+
+@media (max-width: 768px) {
+  :root {
+    --m-space-sm: 16px;
+    --m-space-md: 24px;
+    --m-space-lg: 32px;
+    --m-container-max: 400px;
+    --m-container-pad: 16px;
+    /* Svijetlija baza umjesto #071824 — nema „praznog“ tamnoplavog ekrana */
+    --m-page-bg: #1599c9;
+  }
+
+  html {
+    overflow-x: hidden;
+  }
+
+  body {
+    background-color: var(--m-page-bg);
+  }
+
+  main.bg-scroll,
+  .bg-scroll__image {
+    background-color: transparent;
+  }
+
+  /* --- Sekcije i kontejner (samo mobilni) --- */
+  .section {
+    width: 100%;
+    max-width: 100vw;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .section + .section {
+    margin-top: var(--m-space-lg);
+  }
+
+  /* 1. sekcija: bez dodatnog tamnog sloja — samo sadržaj + hero__media */
+  .section--hero {
+    margin-top: 0;
+    padding-top: var(--m-space-sm);
+    background-color: transparent;
+    background-image: none;
+  }
+
+  .section--footer {
+    margin-top: var(--m-space-lg);
+    background-color: transparent;
+  }
+
+  .container {
+    width: 100%;
+    max-width: var(--m-container-max);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--m-container-pad);
+    padding-right: var(--m-container-pad);
+    box-sizing: border-box;
+  }
+
+  .bg-scroll__image {
+    width: 100%;
+    max-width: 100vw;
+    aspect-ratio: auto;
+    min-height: 0;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: visible;
+  }
+
+  @supports not (aspect-ratio: 1 / 1) {
+    .bg-scroll__image {
+      height: auto;
+    }
+  }
+
+  .bg-scroll__image img,
+  .bg-scroll__image .letak-row__bg,
+  .bg-scroll__image .footer__curve {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .bg-scroll__image .packs-slider__layer {
+    max-width: 100%;
+  }
+
+  /* --- Hero: vertikalni stog, bez preklapanja --- */
+  .hero {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 0 0 var(--m-space-md);
+    padding-inline: 0;
+    pointer-events: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    align-self: stretch;
+    overflow: visible;
+    background-image: none;
+    background-color: transparent;
+    box-sizing: border-box;
+    gap: 0;
+  }
+
+  .hero__media {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    align-self: stretch;
+    width: 100%;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+    background-color: transparent;
+    background-image: url("./images/hero-background-desktop.jpg");
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: cover;
+    overflow: visible;
+    border-radius: 12px;
+  }
+
+  .hero img {
+    display: block;
+    height: auto;
+  }
+
+  .hero__brand {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    height: auto;
+    margin: 0 auto var(--m-space-sm);
+    display: block;
+    flex-shrink: 0;
+    align-self: center;
+    object-fit: contain;
+  }
+
+  .hero__left {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    margin-top: var(--m-space-sm);
+    display: block;
+    align-self: stretch;
+  }
+
+  .hero__right {
+    position: relative;
+    right: auto;
+    left: auto;
+    top: auto;
+    transform: none;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    margin-top: var(--m-space-sm);
+    display: block;
+    align-self: stretch;
+  }
+
+  .hero__curve {
+    display: none;
+  }
+
+  /* --- Uvod (banner + tekst) --- */
+  .between__banner {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto var(--m-space-md);
+    display: block;
+    pointer-events: none;
+  }
+
+  .between__text {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+    box-sizing: border-box;
+    text-align: center;
+  }
+
+  .between__lead {
+    font-size: clamp(15px, 4vw, 18px);
+    line-height: 1.25;
+    margin: 0 0 var(--m-space-sm);
+  }
+
+  .between__body {
+    font-size: clamp(14px, 3.7vw, 17px);
+    line-height: 1.25;
+    margin: 0;
+  }
+
+  /* --- Nagrade --- */
+  .shapes {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: var(--m-space-md) 0 var(--m-space-lg);
+    z-index: 2;
+    overflow: visible;
+  }
+
+  /* Nagrade: svjetliji trak umjesto #093a51 (manje „praznine“ ispod CTA) */
+  .shapes::before {
+    top: 0;
+    transform: translateX(-50%);
+    width: 100vw;
+    height: 100%;
+    min-height: 100%;
+    left: 50%;
+    background: #1f93bf;
+  }
+
+  .shapes__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--m-space-sm);
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+
+  .shapes-cta {
+    margin-top: var(--m-space-md);
+    width: 100%;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    justify-items: stretch;
+    box-sizing: border-box;
+  }
+
+  .shapes-cta__btn {
+    width: 100%;
+    max-width: none;
+    box-sizing: border-box;
+    border-radius: 999px;
+    padding: 14px var(--m-space-md);
+    font-size: clamp(17px, 4.2vw, 20px);
+  }
+
+  .shapes-cta__text {
+    max-width: 100%;
+    padding: 0 4px;
+    box-sizing: border-box;
+    text-align: center;
+  }
+
+  /* --- Edu blok --- */
+  .section__title--male-tajne {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto var(--m-space-md);
+    display: block;
+    z-index: 2;
+  }
+
+  .section--edu .edu-letak-bg {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    width: 100vw;
+    max-width: none;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    min-height: 120px;
+    height: auto;
+    flex: 0 0 auto;
+    background: linear-gradient(180deg, #1a85b0 0%, #1576a0 55%, #126892 100%);
+    z-index: 0;
+  }
+
+  .bubbles-banner {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    width: 100%;
+    max-width: 100%;
+    margin: calc(-1 * var(--m-space-md)) auto 0;
+    display: block;
+    z-index: 1;
+  }
+
+  .letak-row {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    width: 100%;
+    max-width: 100%;
+    margin: var(--m-space-md) auto 0;
+    z-index: 1;
+  }
+
+  .letak-row__link {
+    pointer-events: auto;
+  }
+
+  .letak-row__text {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    max-width: 100%;
+    font-size: 16px;
+    margin-top: var(--m-space-sm);
+    text-align: center;
+  }
+
+  /* --- Packs slider --- */
+  .packs-slider {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    z-index: 2;
+  }
+
+  .packs-top-curve {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: 100%;
+    height: auto;
+    z-index: 3;
+  }
+
+  .packs-slider__stack {
+    aspect-ratio: 1 / 1.05;
+    max-height: 72vh;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .packs-slider__layer--bg {
+    transform: translateY(0) scale(1.08);
+    object-position: center center;
+  }
+
+  .packs-slider__layer--objects {
+    transform: translateY(-12px) scale(0.78);
+  }
+
+  .packs-slider__layer--content {
+    transform: translateY(-14px) scale(0.62);
+  }
+
+  .packs-slider__controls {
+    bottom: 16px;
+    gap: var(--m-space-sm);
+    transform: translateX(-50%);
+  }
+
+  .packs-slider__dot {
+    font-size: 26px;
+  }
+
+  .packs-slider__nav {
+    font-size: 20px;
+  }
+
+  .packs-bottom-curve {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    width: 100%;
+    max-width: 100%;
+    margin: var(--m-space-sm) auto 0;
+    display: block;
+    z-index: 2;
+  }
+
+  /* Predzadnja sekcija (recepti): bez tamnog „pločastog“ bloka */
+  .section--recipes {
+    background-color: transparent;
+    background-image: none;
+  }
+
+  .recipes-section {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: var(--m-space-lg) 0 var(--m-space-lg);
+    z-index: 2;
+    background-color: transparent;
+  }
+
+  .recipes-section::before {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-image: none;
+    background-color: #2eb0e0;
+  }
+
+  .recipes-section__intro {
+    padding: 0;
+    box-sizing: border-box;
+    text-align: center;
+  }
+
+  .recipes-section__title-image {
+    width: 100%;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .recipes-section__lead {
+    font-size: clamp(15px, 4vw, 18px);
+    padding: 0;
+    margin: var(--m-space-sm) auto 0;
+    max-width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  .recipes-grid {
+    width: 100%;
+    max-width: 100%;
+    margin: var(--m-space-md) auto 0;
+    grid-template-columns: 1fr;
+    gap: var(--m-space-md);
+    padding: var(--m-space-md) 0;
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+  }
+
+  .recipe-card__img {
+    height: auto;
+    min-height: 140px;
+    max-height: 220px;
+    width: 100%;
+    max-width: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+
+  .recipe-card__title {
+    font-size: clamp(13px, 3.6vw, 15px);
+    text-align: center;
+    margin-top: var(--m-space-sm);
+  }
+
+  .recipes-section__cta {
+    margin-top: var(--m-space-lg);
+    width: 100%;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0;
+    box-sizing: border-box;
+    text-align: center;
+  }
+
+  .recipes-section__cta-text {
+    font-size: clamp(14px, 3.8vw, 16px);
+    margin-bottom: var(--m-space-md);
+  }
+
+  .recipes-section__cta-btn {
+    width: 100%;
+    max-width: none;
+    display: block;
+    box-sizing: border-box;
+    border-radius: 999px;
+    padding: 14px var(--m-space-md);
+    text-align: center;
+  }
+
+  /* --- Footer --- */
+  .site-footer {
+    position: relative;
+    left: auto;
+    right: auto;
+    top: auto;
+    bottom: auto;
+    transform: none;
+    width: 100%;
+    max-width: 100vw;
+    margin: 0;
+    z-index: 3;
+  }
+
+  .site-footer > .container {
+    width: 100%;
+    max-width: var(--m-container-max);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--m-container-pad);
+    padding-right: var(--m-container-pad);
+    box-sizing: border-box;
+  }
+
+  .footer__curve {
+    width: 100%;
+    max-width: 100%;
+    display: block;
+  }
+
+  .footer__body {
+    width: 100%;
+    padding: var(--m-space-md) 0;
+    background: transparent;
+  }
+
+  .footer__content {
+    display: grid;
+    grid-template-columns: 72px minmax(0, 1fr) minmax(0, 1fr) 56px;
+    align-items: start;
+    column-gap: 8px;
+    row-gap: 0;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+
+  .footer__col {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    max-width: none;
+  }
+
+  .footer__col--podravka {
+    max-width: 72px;
+  }
+
+  .footer__col--links,
+  .footer__col--contact {
+    border-left: 1px solid rgba(255, 255, 255, 0.18);
+    padding-left: 8px;
+  }
+
+  .footer__podravka-logo {
+    height: 16px;
+    width: auto;
+    max-height: none;
+  }
+
+  .footer__podravka-copy {
+    font-size: 7px;
+    line-height: 1.2;
+    max-width: 72px;
+  }
+
+  .footer__col--links .footer__link {
+    font-size: 8px;
+    line-height: 1.15;
+  }
+
+  .footer__col--contact .footer__contact-title {
+    font-size: 8px !important;
+    line-height: 1.15;
+  }
+
+  .footer__col--contact .footer__contact-link {
+    font-size: 9px !important;
+    line-height: 1.15;
+  }
+
+  .footer__logo {
+    transform: none;
+    height: clamp(52px, 14vw, 76px);
+    width: auto;
+    max-width: 56px;
+    margin: 0;
+    margin-left: 0;
+    align-self: flex-start;
+    justify-self: end;
+  }
+
+  .footer__social {
+    margin-top: 6px;
+    gap: 6px;
+  }
+
+  .footer__social-icon {
+    height: 12px;
+  }
+
+  .footer__social-placeholder {
+    width: 28px;
+    height: 20px;
+    border-radius: 6px;
+  }
+
+  .footer__social-placeholder::after {
+    border-top-width: 3px;
+    border-bottom-width: 3px;
+    border-left-width: 5px;
+  }
+
+  /* --- Kviz panel u kontejneru --- */
+  .section--quiz {
+    margin-top: var(--m-space-md);
+  }
+
+  .section--quiz .container {
+    padding-bottom: var(--m-space-lg);
+  }
+
+  .quiz-panel {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .quiz__question {
+    text-align: center;
+  }
+
+  /* --- Popupi --- */
+  .quiz-popup__inner,
+  .start-popup__inner {
+    width: min(100vw - 24px, 420px);
+    max-height: min(620px, 88vh);
+    height: auto;
+    min-height: min(480px, 75vh);
+  }
+
+  .start-popup__actions {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .start-popup__btn {
+    width: 100%;
+    max-width: none;
+    box-sizing: border-box;
+    border-radius: 999px;
+    padding: 14px var(--m-space-md);
+  }
+
+  .quiz-popup__inner > .quiz-popup__form > .quiz-popup__close,
+  .quiz-popup__inner > .quiz-popup__close:not(.quiz-popup__x) {
+    width: 100%;
+    max-width: none;
+    box-sizing: border-box;
+    border-radius: 999px;
+    padding: 14px var(--m-space-md);
+  }
+
+  .quiz-popup__title {
+    font-size: clamp(22px, 5.5vw, 30px);
+  }
+
+  .quiz-popup__answer {
+    font-size: clamp(14px, 3.8vw, 17px);
+    border-radius: 12px;
+  }
+
+  .quiz__next {
+    max-width: none;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+    border-radius: 14px;
+    padding: 14px var(--m-space-md);
+  }
+}
+
+/* Uži ekran: jedna kolona nagrada */
+@media (max-width: 400px) {
+  .shapes__grid {
+    grid-template-columns: 1fr;
+    max-width: 260px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .shape-card {
+    max-width: 260px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

@@ -1,0 +1,3 @@
+# Statički sajt — nema build koraka
+[build]
+  publish = "."

@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="bs">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kviz</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./mobile.css" />
+  </head>
+  <body>
+    <main class="bg-scroll" aria-label="Pozadina">
+      <div class="bg-scroll__image">
+        <section class="section section--hero" aria-label="Hero">
+          <div class="container">
+            <header class="hero" aria-label="Header">
+              <img class="hero__brand" src="./images/vegeta-logo.png" alt="Vegeta" />
+              <div class="hero__media">
+                <img
+                  class="hero__left"
+                  src="./images/hero-content-left-desktop.png"
+                  alt="Nagradna igra Začini inspiracije"
+                />
+                <img
+                  class="hero__right"
+                  src="./images/hero-content-right-desktop.png"
+                  alt=""
+                  aria-hidden="true"
+                />
+              </div>
+              <img
+                class="hero__curve"
+                src="./images/hero-curve-desktop.png"
+                alt=""
+                aria-hidden="true"
+              />
+            </header>
+          </div>
+        </section>
+
+        <section class="section section--intro" aria-label="Uvod u nagradnu igru">
+          <div class="container">
+            <img
+              class="between__banner"
+              src="./images/uroni-u.png"
+              alt="Uroni u svijet začina inspiracije i osvoji maestralne nagrade!"
+            />
+
+            <section class="between__text" aria-label="Informacije">
+              <p class="between__lead">
+                Riješi kviz o Vegeta Maestro začinima, testiraj svoje kulinarsko
+                umijeće i osvoji maestralne nagrade!
+              </p>
+              <p class="between__body">
+                U periodu od <strong>06.04.- 03.05.2026.</strong> tačno odgovori na
+                10 pitanja u Vegeta Maestro kvizu, pošalji prijavu i sudjeluj u
+                nagradnom kvizu.
+              </p>
+            </section>
+          </div>
+        </section>
+
+        <section class="section section--prizes" aria-label="Nagrade">
+          <div class="container">
+        <section class="shapes" aria-label="Sekcija sa oblicima">
+          <div class="shapes__grid">
+            <button
+              class="shape-card shape-card--1"
+              type="button"
+              aria-label="Nagrada 1"
+            ></button>
+            <button
+              class="shape-card shape-card--2"
+              type="button"
+              aria-label="Nagrada 2"
+            ></button>
+            <button
+              class="shape-card shape-card--3"
+              type="button"
+              aria-label="Nagrada 3"
+            ></button>
+            <button
+              class="shape-card shape-card--4"
+              type="button"
+              aria-label="Nagrada 4"
+            ></button>
+          </div>
+
+          <div class="shapes-cta" aria-label="Pokretanje kviza">
+            <button type="button" id="startQuizBtn" class="shapes-cta__btn">
+              Pokreni kviz!
+            </button>
+            <p class="shapes-cta__text">
+              Više informacija pronađi u
+              <a
+                class="shapes-cta__link"
+                href="#"
+                aria-label="Pravila nagradnog kviza"
+                >pravilima nagradnog kviza.</a
+              >
+            </p>
+          </div>
+        </section>
+          </div>
+        </section>
+
+        <div
+          id="startPopup"
+          class="start-popup"
+          hidden
+          aria-hidden="true"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Pokreni kviz popup"
+        >
+          <div class="start-popup__inner">
+            <button type="button" id="closeStartPopupBtn" class="start-popup__close" aria-label="Zatvori popup">
+              ✕
+            </button>
+            <h2 class="start-popup__title">Koliko dobro poznaješ Vegeta Maestro začine?</h2>
+            <div class="start-popup__scroll">
+              <p class="start-popup__lead">
+                Testiraj svoje znanje o Vegeta Maestro začinima kroz zabavan i edukativan kviz.
+                Odgovori tačno na svih 10 pitanja i sudjeluj u nagradivanju!
+              </p>
+              <p class="start-popup__note">
+                Napomena: Za prelazak na sljedeće pitanje potrebno je pročitati kratko objašnjenje
+                nakon svakog odgovora.
+              </p>
+            </div>
+            <div class="start-popup__actions">
+              <button type="button" id="continueToQuizBtn" class="start-popup__btn">KRENI</button>
+            </div>
+          </div>
+        </div>
+
+        <section class="section section--edu" aria-label="Male začinjene tajne i letak">
+          <div class="container">
+            <img
+              class="section__title section__title--male-tajne"
+              src="./images/male-tajne.png"
+              alt="Male začinjene tajne"
+            />
+          </div>
+
+          <div class="edu-letak-bg" aria-hidden="true"></div>
+
+          <div class="container">
+            <img
+              class="bubbles-banner"
+              src="./images/educational-questions-desktop.png"
+              alt=""
+              aria-hidden="true"
+            />
+
+            <section class="letak-row" aria-label="Edukativni letak">
+              <a
+                class="letak-row__link"
+                href="https://vegeta-maestro-zacini-inspiracije.ba/assets/img/Vegeta-Maestro-monozacini-Edukativni-letak-2025.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Preuzmi edukativni letak (PDF)"
+              >
+                <img
+                  class="letak-row__bg"
+                  src="./images/preuzmi-letak-desktop.png"
+                  alt=""
+                />
+              </a>
+            </section>
+          </div>
+        </section>
+
+        <section class="section section--packs" aria-label="Slider proizvoda">
+          <div class="container">
+        <section class="packs-slider" aria-label="Packs slider sekcija">
+          <img
+            class="packs-top-curve"
+            src="./images/packs-top-curve-desktop.png"
+            alt=""
+            aria-hidden="true"
+          />
+          <div class="packs-slider__stack">
+            <article class="packs-slide is-active" data-slide="1" aria-hidden="false">
+              <img
+                class="packs-slider__layer packs-slider__layer--bg"
+                src="./images/packs-slider-1-background-desktop.jpg"
+                alt=""
+                aria-hidden="true"
+              />
+              <img
+                class="packs-slider__layer packs-slider__layer--objects"
+                src="./images/packs-slider-background-objects-desktop.png"
+                alt=""
+                aria-hidden="true"
+              />
+              <img
+                class="packs-slider__layer packs-slider__layer--content"
+                src="./images/packs-slider-1-content-desktop.png"
+                alt=""
+                aria-hidden="true"
+              />
+            </article>
+            <article class="packs-slide" data-slide="2" aria-hidden="true">
+              <img
+                class="packs-slider__layer packs-slider__layer--bg"
+                src="./images/packs-slider-2-background-desktop.jpg"
+                alt=""
+                aria-hidden="true"
+              />
+              <img
+                class="packs-slider__layer packs-slider__layer--objects"
+                src="./images/packs-slider-background-objects-desktop.png"
+                alt=""
+                aria-hidden="true"
+              />
+              <img
+                class="packs-slider__layer packs-slider__layer--content"
+                src="./images/packs-slider-2-content-desktop.png"
+                alt=""
+                aria-hidden="true"
+              />
+            </article>
+            <article class="packs-slide" data-slide="3" aria-hidden="true">
+              <img
+                class="packs-slider__layer packs-slider__layer--bg"
+                src="./images/packs-slider-3-background-desktop.jpg"
+                alt=""
+                aria-hidden="true"
+              />
+              <img
+                class="packs-slider__layer packs-slider__layer--objects"
+                src="./images/packs-slider-background-objects-desktop.png"
+                alt=""
+                aria-hidden="true"
+              />
+              <img
+                class="packs-slider__layer packs-slider__layer--content"
+                src="./images/packs-slider-3-content-desktop.png"
+                alt=""
+                aria-hidden="true"
+              />
+            </article>
+            <article class="packs-slide" data-slide="4" aria-hidden="true">
+              <img
+                class="packs-slider__layer packs-slider__layer--bg"
+                src="./images/packs-slider-4-background-desktop.jpg"
+                alt=""
+                aria-hidden="true"
+              />
+              <img
+                class="packs-slider__layer packs-slider__layer--objects"
+                src="./images/packs-slider-background-objects-desktop.png"
+                alt=""
+                aria-hidden="true"
+              />
+              <img
+                class="packs-slider__layer packs-slider__layer--content"
+                src="./images/packs-slider-4-content-desktop.png"
+                alt=""
+                aria-hidden="true"
+              />
+            </article>
+
+            <div class="packs-slider__controls" aria-label="Navigacija slidera">
+              <button type="button" class="packs-slider__nav packs-slider__nav--prev" aria-label="Prethodni slajd">
+                &lt;
+              </button>
+              <div class="packs-slider__pagination" role="tablist" aria-label="Slide pagination">
+                <button type="button" class="packs-slider__dot is-active" data-goto="1" aria-label="Slajd 1">1</button>
+                <button type="button" class="packs-slider__dot" data-goto="2" aria-label="Slajd 2">2</button>
+                <button type="button" class="packs-slider__dot" data-goto="3" aria-label="Slajd 3">3</button>
+                <button type="button" class="packs-slider__dot" data-goto="4" aria-label="Slajd 4">4</button>
+              </div>
+              <button type="button" class="packs-slider__nav packs-slider__nav--next" aria-label="Sljedeći slajd">
+                &gt;
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <img
+          class="packs-bottom-curve"
+          src="./images/packs-bottom-curve-desktop.png"
+          alt=""
+          aria-hidden="true"
+        />
+          </div>
+        </section>
+
+        <section class="section section--recipes" aria-label="Recepti">
+          <div class="container">
+        <section class="recipes-section" aria-label="Recepti sekcija">
+          <div class="recipes-section__intro">
+            <img
+              class="recipes-section__title-image"
+              src="./images/nezamjenjive-i-uzbudljive-desktop.png"
+              alt="Nezamjenjive i uzbudljive inspiracije svakog jela"
+            />
+            <p class="recipes-section__lead">
+              Dok čekaš rezultate kviza, okušaj se u pripremi inspirativnih recepata koji ti
+              donose senzacionalni okusi Vegeta Maestro začinima.
+            </p>
+          </div>
+
+          <div class="recipes-grid">
+            <a
+              class="recipe-card"
+              href="https://www.coolinarika.com/recept/curry-od-slanutka-i-spinata-7153ad46-d3e5-11eb-9d6a-329b937994b6"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                class="recipe-card__img"
+                src="https://piovariations.cdn.podravka.net/13dfb5b2-d3f2-11eb-a724-ba7c275af1d5/v/f2b1f6a6-64bc-11eb-b6c2-0242ac130010/1600x1200-f2b21938-64bc-11eb-9498-0242ac130010.jpeg"
+                alt="Curry od slanutka i špinata"
+                loading="lazy"
+              />
+              <p class="recipe-card__title">Curry od slanutka i špinata</p>
+            </a>
+            <a
+              class="recipe-card"
+              href="https://www.coolinarika.com/recept/rizoto-od-gljiva-225be81e-1f82-11ec-ae6c-06032cfc801a"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                class="recipe-card__img"
+                src="https://piovariations.cdn.podravka.net/2693b7cc-2040-11ec-b5f3-7a85b4fc0554/v/f2b1f6a6-64bc-11eb-b6c2-0242ac130010/1600x1200-f2b21938-64bc-11eb-9498-0242ac130010.jpeg"
+                alt="Rižoto od gljiva"
+                loading="lazy"
+              />
+              <p class="recipe-card__title">Rižoto s gljivama</p>
+            </a>
+            <a
+              class="recipe-card"
+              href="https://www.coolinarika.com/recept/riblji-tacosi/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                class="recipe-card__img"
+                src="https://piovariations.cdn.podravka.net/c2aeb4b0-14d9-11ee-9d87-c631db9ba15e/v/f2b1f6a6-64bc-11eb-b6c2-0242ac130010/1600x1200-f2b21938-64bc-11eb-9498-0242ac130010.jpeg"
+                alt="Riblji tacosi"
+                loading="lazy"
+              />
+              <p class="recipe-card__title">Riblji tacosi</p>
+            </a>
+            <a
+              class="recipe-card"
+              href="https://www.coolinarika.com/recept/rizoto-s-gljivama-4d8dcee6-04fd-11ee-8fdc-8224efc57bc0"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                class="recipe-card__img"
+                src="https://piovariations.cdn.podravka.net/fbc3961a-086f-11ee-abea-feca11304db1/v/f2b1f6a6-64bc-11eb-b6c2-0242ac130010/1600x1200-f2b21938-64bc-11eb-9498-0242ac130010.jpeg"
+                alt="Rižoto s gljivama"
+                loading="lazy"
+              />
+              <p class="recipe-card__title">Rižoto s gljivama</p>
+            </a>
+            <a
+              class="recipe-card"
+              href="https://www.coolinarika.com/recept/pohani-sampinjoni-punjeni-sirom-8508c86e-63c2-11eb-b5a6-0242ac12008c"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                class="recipe-card__img"
+                src="https://piovariations.cdn.podravka.net/872022e6-63c2-11eb-993b-0242ac120060/v/f2b1f6a6-64bc-11eb-b6c2-0242ac130010/1600x1200-f2b21938-64bc-11eb-9498-0242ac130010.jpeg"
+                alt="Šampinjoni punjeni sirom"
+                loading="lazy"
+              />
+              <p class="recipe-card__title">Šampinjoni punjeni sirom</p>
+            </a>
+          </div>
+
+          <div class="recipes-section__cta">
+            <p class="recipes-section__cta-text">
+              Želiš se dodatno inspirisati?<br />
+              ZavirI u našu knjižicu recepata Vegeta Maestro monozačina.
+            </p>
+            <a
+              class="recipes-section__cta-btn"
+              href="https://vegeta-maestro-zacini-inspiracije.ba/assets/storage/vegeta-maestro-2025-zeleni-zacini-knjizica-recepata-bih.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Inspiriši se!</a>
+          </div>
+        </section>
+          </div>
+        </section>
+
+        <footer class="site-footer section section--footer" aria-label="Footer">
+          <img
+            class="footer__curve"
+            src="./images/footer-desktop-curve.png"
+            alt=""
+            aria-hidden="true"
+          />
+          <div class="container">
+          <div class="footer__body">
+            <div class="footer__content">
+              <div class="footer__col footer__col--podravka">
+                <img
+                  class="footer__podravka-logo"
+                  src="./images/footer-podravka-logo-desktop (1).png"
+                  alt="Podravka Grupa"
+                />
+                <p class="footer__podravka-copy">
+                  © 2024-2026 Podravka d.d.<br />
+                  Sva prava pridržana.<br />
+                  <em>Podravka je registrirani žig Podravka d.d.</em>
+                </p>
+              </div>
+
+              <div class="footer__col footer__col--links" aria-label="Linkovi">
+                <a
+                  class="footer__link"
+                  href="./pravila-nagradne-igre.html"
+                  aria-label="Pravila nagradne igre"
+                >
+                  Pravila nagradne igre</a
+                >
+                <a class="footer__link" href="./uvjeti-koristenja.html" aria-label="Uvjeti korištenja"
+                  >Uvjeti korištenja</a
+                >
+                <a class="footer__link" href="./zastita-privatnosti.html" aria-label="Zaštita privatnosti"
+                  >Zaštita privatnosti</a
+                >
+              </div>
+
+              <div class="footer__col footer__col--contact">
+                <a class="footer__contact-title footer__link" href="./o-podravki.html" aria-label="O Podravki"
+                  >O Podravki</a
+                >
+                <a
+                  class="footer__link footer__contact-link"
+                  href="./kontaktirajte-nas.html"
+                  aria-label="Kontaktirajte nas"
+                >
+                  Kontaktirajte nas</a
+                >
+
+                <div class="footer__social" aria-label="Društvene mreže">
+                  <a class="footer__social-link" href="#" aria-label="Instagram">
+                    <img
+                      class="footer__social-icon"
+                      src="./images/instagram-desktop.png"
+                      alt="Instagram"
+                    />
+                  </a>
+                  <a class="footer__social-link" href="#" aria-label="Facebook">
+                    <img class="footer__social-icon" src="./images/fb-desktop.png" alt="Facebook" />
+                  </a>
+                  <span class="footer__social-placeholder" aria-hidden="true" />
+                </div>
+              </div>
+
+              <img
+                class="footer__logo"
+                src="./images/footer-logo-desktop.png"
+                alt="Vegeta Maestro"
+              />
+            </div>
+          </div>
+          </div>
+        </footer>
+
+        <section class="section section--quiz" aria-label="Kviz">
+          <div class="container">
+        <section id="quiz" class="quiz-panel" hidden aria-label="Kviz">
+          <p id="question" class="quiz__question"></p>
+          <div id="answers" class="quiz__answers"></div>
+          <button type="button" id="nextBtn" class="quiz__next" disabled>
+            Sljedeće pitanje
+          </button>
+        </section>
+          </div>
+        </section>
+
+        <div
+          id="popup"
+          class="quiz-popup"
+          hidden
+          aria-hidden="true"
+          role="dialog"
+          aria-modal="true"
+        >
+          <div class="quiz-popup__inner"></div>
+        </div>
+
+        <div id="result" class="quiz-result" hidden aria-live="polite"></div>
+      </div>
+    </main>
+    <script src="./supabase-config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.1/dist/umd/supabase.min.js"></script>
+    <script src="./script.js" defer></script>
+  </body>
+</html>
