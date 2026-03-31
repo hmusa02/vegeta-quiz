@@ -393,6 +393,7 @@ const QUIZ_TIME_LIMIT_MS = 3 * 60 * 1000;
 const MAX_PLAYS_TOTAL = 5;
 const PLAY_STORAGE_KEY = "vegeta_quiz_plays";
 
+/* ---------- localStorage (UX helper for quiz start) ---------- */
 function getQuizPlays() {
   try {
     const data = JSON.parse(localStorage.getItem(PLAY_STORAGE_KEY) || "{}");
@@ -425,6 +426,29 @@ function canPlayToday() {
 function getRemainingPlays() {
   const plays = getQuizPlays();
   return Math.max(0, MAX_PLAYS_TOTAL - plays.total);
+}
+
+/* ---------- Supabase: provjera limita po emailu/telefonu ---------- */
+async function checkPlayLimitByContact(email, phone) {
+  const client = getSupabaseClient();
+  if (!client) return { allowed: true };
+
+  try {
+    const { data, error } = await client.rpc("check_quiz_limit", {
+      p_email: email.toLowerCase().trim(),
+      p_phone: phone.trim(),
+    });
+    if (error) throw error;
+    return {
+      allowed: data.allowed,
+      reason: data.reason || null,
+      total: data.total_plays,
+      today: data.today_plays,
+    };
+  } catch (e) {
+    console.warn("[quiz] Supabase check_quiz_limit failed:", e);
+    return { allowed: true };
+  }
 }
 
 function getRandomQuestions(count) {
@@ -698,6 +722,15 @@ async function submitQuizApplication(form) {
     return { ok: true, skipped: true };
   }
 
+  // Provjera limita po emailu/telefonu prije inserta
+  const limitCheck = await checkPlayLimitByContact(row.email, row.phone);
+  if (!limitCheck.allowed) {
+    const limitMsg = limitCheck.reason === "daily"
+      ? "Već ste se danas prijavili s ovim e-mailom ili brojem telefona. Vratite se sutra!"
+      : "Iskoristili ste svih 5 prijava s ovim e-mailom ili brojem telefona. Hvala na sudjelovanju!";
+    return { ok: false, limitReached: true, message: limitMsg };
+  }
+
   const { error } = await client.from("quiz_applications").insert(row);
   if (error) {
     console.error("[quiz] Supabase insert:", error);
@@ -780,7 +813,7 @@ function showFormPopup() {
         return;
       }
       if (errEl) {
-        errEl.textContent = result.duplicate
+        errEl.textContent = (result.duplicate || result.limitReached)
           ? result.message
           : result.message ||
             "Slanje nije uspjelo. Provjeri podatke ili pokušaj kasnije.";
