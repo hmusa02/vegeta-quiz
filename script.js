@@ -388,8 +388,44 @@ let startPopupOpen = false;
 let popupMode = "closed";
 let quizTimerId = null;
 
-const QUIZ_TOTAL = 10;
+const QUIZ_TOTAL = 5;
 const QUIZ_TIME_LIMIT_MS = 3 * 60 * 1000;
+const MAX_PLAYS_TOTAL = 5;
+const PLAY_STORAGE_KEY = "vegeta_quiz_plays";
+
+function getQuizPlays() {
+  try {
+    const data = JSON.parse(localStorage.getItem(PLAY_STORAGE_KEY) || "{}");
+    return {
+      dates: Array.isArray(data.dates) ? data.dates : [],
+      total: typeof data.total === "number" ? data.total : 0,
+    };
+  } catch {
+    return { dates: [], total: 0 };
+  }
+}
+
+function saveQuizPlay() {
+  const plays = getQuizPlays();
+  const today = new Date().toISOString().slice(0, 10);
+  plays.dates.push(today);
+  plays.total += 1;
+  localStorage.setItem(PLAY_STORAGE_KEY, JSON.stringify(plays));
+}
+
+function canPlayToday() {
+  const plays = getQuizPlays();
+  const today = new Date().toISOString().slice(0, 10);
+  const playedToday = plays.dates.filter((d) => d === today).length;
+  if (playedToday >= 1) return { allowed: false, reason: "daily" };
+  if (plays.total >= MAX_PLAYS_TOTAL) return { allowed: false, reason: "total" };
+  return { allowed: true };
+}
+
+function getRemainingPlays() {
+  const plays = getQuizPlays();
+  return Math.max(0, MAX_PLAYS_TOTAL - plays.total);
+}
 
 function getRandomQuestions(count) {
   const pool = questions.slice();
@@ -503,11 +539,13 @@ function showWrongPopup() {
 }
 
 function showBravoPopup() {
+  saveQuizPlay();
+  const remaining = getRemainingPlays();
   popupMode = "bravo";
   renderPopupContent(`
     <button type="button" id="popupCloseX" class="quiz-popup__x" aria-label="Zatvori">✕</button>
     <h3 class="quiz-popup__title">Bravo!</h3>
-    <p class="quiz-popup__text quiz-popup__text--center">Uspješno si začinio 10/10 jela!</p>
+    <p class="quiz-popup__text quiz-popup__text--center">Uspješno si začinio ${QUIZ_TOTAL}/${QUIZ_TOTAL} jela!</p>
     <button type="button" id="popupPrimaryBtn" class="quiz-popup__close">PRIJAVI SE</button>
   `);
   openQuizPopup();
@@ -769,7 +807,7 @@ function showTimeoutPopup() {
   renderPopupContent(`
     <button type="button" id="popupCloseX" class="quiz-popup__x" aria-label="Zatvori">✕</button>
     <h3 class="quiz-popup__title">Vrijeme je isteklo!</h3>
-    <p class="quiz-popup__text quiz-popup__text--center">Pokušaj ponovno i osvoji 10/10.</p>
+    <p class="quiz-popup__text quiz-popup__text--center">Pokušaj ponovno i osvoji ${QUIZ_TOTAL}/${QUIZ_TOTAL}.</p>
     <button type="button" id="popupPrimaryBtn" class="quiz-popup__close">POKRENI KVIZ</button>
   `);
   openQuizPopup();
@@ -811,7 +849,7 @@ function showQuestion() {
 
   renderPopupContent(`
     <button type="button" id="popupCloseX" class="quiz-popup__x" aria-label="Zatvori">✕</button>
-    <h3 class="quiz-popup__title quiz-popup__title--question">${q.question}</h3>
+    <h3 class="quiz-popup__title quiz-popup__title--question"><span class="quiz-popup__q-number">${currentQuestionIndex + 1}.</span> ${q.question}</h3>
     <div class="quiz-popup__answers">${answersHtml}</div>
   `);
   openQuizPopup();
@@ -917,7 +955,31 @@ function startQuiz() {
   showQuestion();
 }
 
+function showLimitPopup(reason) {
+  popupMode = "limit";
+  const msg = reason === "daily"
+    ? "Već si danas odigrao/la kviz. Vrati se sutra za novi pokušaj!"
+    : "Iskoristio/la si svih 5 pokušaja u trajanju nagradne igre. Hvala na sudjelovanju!";
+  renderPopupContent(`
+    <button type="button" id="popupCloseX" class="quiz-popup__x" aria-label="Zatvori">✕</button>
+    <h3 class="quiz-popup__title">Limit dostignut</h3>
+    <p class="quiz-popup__text quiz-popup__text--center">${msg}</p>
+    <button type="button" id="popupPrimaryBtn" class="quiz-popup__close">ZATVORI</button>
+  `);
+  openQuizPopup();
+  const closeX = document.getElementById("popupCloseX");
+  if (closeX) closeX.addEventListener("click", exitQuizFlow);
+  const primary = document.getElementById("popupPrimaryBtn");
+  if (primary) primary.addEventListener("click", exitQuizFlow);
+}
+
 function openStartPopup() {
+  const check = canPlayToday();
+  if (!check.allowed) {
+    showLimitPopup(check.reason);
+    return;
+  }
+
   const popup = document.getElementById("startPopup");
   if (!popup) {
     startQuiz();
