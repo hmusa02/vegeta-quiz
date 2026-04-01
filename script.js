@@ -722,22 +722,21 @@ async function submitQuizApplication(form) {
     return { ok: true, skipped: true };
   }
 
-  // Provjera limita po emailu/telefonu prije inserta
-  const limitCheck = await checkPlayLimitByContact(row.email, row.phone);
-  if (!limitCheck.allowed) {
-    const limitMsg = limitCheck.reason === "daily"
-      ? "Već ste se danas prijavili s ovim e-mailom ili brojem telefona. Vratite se sutra!"
-      : "Iskoristili ste svih 5 prijava s ovim e-mailom ili brojem telefona. Hvala na sudjelovanju!";
-    return { ok: false, limitReached: true, message: limitMsg };
+  // RPC radi i provjeru limita i insert u jednom pozivu da zaobiđe eventualne unique indexe/RLS probleme
+  const { data: insertResult, error: rpcError } = await client.rpc("submit_quiz_application", {
+    p_full_name: row.full_name,
+    p_address: row.address,
+    p_city: row.city,
+    p_postal_code: row.postal_code,
+    p_email: row.email,
+    p_phone: row.phone,
+  });
+  if (rpcError) {
+    console.error("[quiz] Supabase submit_quiz_application:", rpcError);
+    return { ok: false, message: rpcError.message || "Greška pri slanju." };
   }
-
-  const { error } = await client.from("quiz_applications").insert(row);
-  if (error) {
-    console.error("[quiz] Supabase insert:", error);
-    if (isSupabaseUniqueViolation(error)) {
-      return { ok: false, duplicate: true, message: QUIZ_APPLY_MSG.duplicate };
-    }
-    return { ok: false, message: error.message || "Greška pri slanju." };
+  if (insertResult && !insertResult.ok) {
+    return { ok: false, limitReached: true, message: insertResult.message };
   }
   return { ok: true, skipped: false };
 }
